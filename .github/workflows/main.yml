@@ -12,8 +12,6 @@ jobs:
       with:
         node-version: '10.x'
 
-  staging-deploy:
-    steps:
     - uses: actions/checkout@v1
     - name: Install Node.js
       uses: actions/setup-node@v1
