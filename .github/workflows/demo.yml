@@ -29,11 +29,17 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-      env:
+  deploy:    
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy source-code
+        uses: raghvendran966/scp-action@master
+        env:
           HOST: ${{ secrets.SSH_HOST }}
           USERNAME: ${{ secrets.SSH_USERNAME }}
           PORT: 22
           KEY: ${{ secrets.SSH_KEY }}
-      with:
+        with:
           source: "*"
-          target: "/home/ubuntu/demo
+          target: "/home/ubuntu"
