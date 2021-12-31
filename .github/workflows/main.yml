@@ -23,27 +23,25 @@ jobs:
     - name: Install npm dependencies
       run: npm install
     - name: AWS Deploy push
-      uses: ItsKarma/aws-cli@v1.70.0
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: "us-east-1"
-      with:
-        args: >-
-          deploy push
-          --application-name api-server
-          --description "This is a revision for the rishab"
-          --ignore-hidden-files
-          --source.
-    - name: AWS Create Deploy
-      uses: ItsKarma/aws-cli@v1.70.0
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: "us-east-1"
-      with:
-        args: >-
-          deploy create-deployment
-          --application-name rishab
-          --deployment-config-name CodeDeployDefault.OneAtATime
-          --deployment-group-name demo
+      ws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+
+aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+aws-region: ap-south-1
+
+# Step 3
+
+– name: Create CodeDeploy Deployment
+
+id: deploy
+
+run: |
+aws deploy create-deployment \
+
+–application-name rishab\
+
+–deployment-group-name demo \
+
+–deployment-config-name CodeDeployDefault.OneAtATime \
+
+–github-location repository=${{ github.repository }},commitId=${{ github.sha }}
