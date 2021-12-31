@@ -34,6 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy source-code
+        uses: raghvendran966/scp-action@master
         env:
           HOST: ${{ secrets.SSH_HOST }}
           USERNAME: ${{ secrets.SSH_USERNAME }}
